@@ -201,15 +201,9 @@ var D = {
 // Link E to D for delegation
 var E = Object.create( D );
 
-// manually bind `foo`s `[[HomeObject]]` as
-// `E`, and `E.[[Prototype]]` is `D`, so thus
-// `super()` is `D.foo()`
-E.foo = C.prototype.foo.toMethod( E, "foo" );
+Object.setPrototypeOf(C.prototype, D);
 
-E.foo(); // "D.foo"
-```
-
-**Note:** `toMethod(..)` clones the method, and takes `homeObject` as its first parameter (which is why we pass `E`), and the second parameter (optionally) sets a `name` for the new method (which keep at "foo").
+E.foo();//"D.foo"
 
 It remains to be seen if there are other corner case gotchas that devs will run into beyond this scenario. Regardless, you will have to be diligent and stay aware of which places the engine automatically figures out `super` for you, and which places you have to manually take care of it. **Ugh!**
 
