@@ -463,7 +463,7 @@ function isThisCool(vals,fn,rx) {
 	);
 }
 
-isThisCool();		// true
+isThisCool();		// TypeError: Method RegExp.prototype.exec call on an incompatible receicer [object Object]
 
 isThisCool(
 	["a","b","c"],
